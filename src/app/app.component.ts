@@ -9,4 +9,6 @@ import { FooterComponent } from './core/layout/footer.component';
   imports: [HeaderComponent, RouterOutlet, FooterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent {
+  // Root component for the application shell.
+}
