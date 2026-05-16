@@ -1,0 +1,16 @@
+<div class="profile-stats-container" *ngIf="profile()">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">{{ articleCount() }}</div>
+      <div class="stat-label">Articles</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">{{ profile()!.following ? '✓' : '○' }}</div>
+      <div class="stat-label">{{ profile()!.following ? 'Following' : 'Not Following' }}</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">★</div>
+      <div class="stat-label">{{ getMemberSinceMessage() }}</div>
+    </div>
+  </div>
+</div>

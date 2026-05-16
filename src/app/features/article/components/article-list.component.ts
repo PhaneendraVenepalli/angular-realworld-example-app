@@ -75,6 +75,7 @@ export class ArticleListComponent implements OnChanges {
   @Input() currentPage = 1;
   @Input() isFollowingFeed = false;
   @Output() pageChange = new EventEmitter<number>();
+  @Output() articleCountChange = new EventEmitter<number>();
 
   ngOnChanges(changes: SimpleChanges): void {
     const configChange = changes['config'];
@@ -124,6 +125,7 @@ export class ArticleListComponent implements OnChanges {
       .subscribe(data => {
         this.loading.set(LoadingState.LOADED);
         this.results.set(data.articles);
+        this.articleCountChange.emit(data.articlesCount);
 
         // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
         this.totalPages.set(

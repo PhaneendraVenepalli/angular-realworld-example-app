@@ -16,6 +16,7 @@
             <img [src]="p.image | defaultImage" class="user-img" />
             <h4>{{ p.username }}</h4>
             <p>{{ p.bio ?? '' }}</p>
+            <app-profile-stats [profile]="p" [articleCount]="articleCount()" />
             @if (!isUser()) {
               <app-follow-button [profile]="p" (toggle)="onToggleFollowing($event)" />
             }
