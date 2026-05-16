@@ -5,10 +5,8 @@ import { combineLatest, EMPTY, of } from 'rxjs';
 import { UserService } from '../../../../core/auth/services/user.service';
 import { Profile } from '../../models/profile.model';
 import { ProfileService } from '../../services/profile.service';
-import { ProfileStateService } from '../../services/profile-state.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FollowButtonComponent } from '../../components/follow-button.component';
-import { ProfileStatsComponent } from '../../components/profile-stats.component';
 import { Errors } from '../../../../core/models/errors.model';
 import { ListErrorsComponent } from '../../../../shared/components/list-errors.component';
 import { DefaultImagePipe } from '../../../../shared/pipes/default-image.pipe';
@@ -18,7 +16,6 @@ import { DefaultImagePipe } from '../../../../shared/pipes/default-image.pipe';
   templateUrl: './profile.component.html',
   imports: [
     FollowButtonComponent,
-    ProfileStatsComponent,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
@@ -31,7 +28,6 @@ import { DefaultImagePipe } from '../../../../shared/pipes/default-image.pipe';
 export class ProfileComponent implements OnInit {
   profile = signal<Profile | null>(null);
   isUser = signal(false);
-  articleCount = signal(0);
   errors = signal<Errors | null>(null);
   destroyRef = inject(DestroyRef);
 
@@ -40,7 +36,6 @@ export class ProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly userService: UserService,
     private readonly profileService: ProfileService,
-    private readonly profileStateService: ProfileStateService,
   ) {}
 
   ngOnInit() {
@@ -60,11 +55,6 @@ export class ProfileComponent implements OnInit {
         this.profile.set(profile);
         this.isUser.set(profile.username === user?.username);
       });
-
-    // Subscribe to article count changes
-    this.profileStateService.articleCount$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(count => {
-      this.articleCount.set(count);
-    });
   }
 
   onToggleFollowing(profile: Profile) {
