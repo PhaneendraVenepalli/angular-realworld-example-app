@@ -12,3 +12,4 @@ export interface Article {
   favoritesCount: number;
   author: Profile;
 }
+//testing to see whether the conflicts happen by deleting the file
