@@ -43,6 +43,8 @@ import { DefaultImagePipe } from '../../../shared/pipes/default-image.pipe';
 export class ArticleCommentComponent {
   @Input() comment!: Comment;
   @Output() delete = new EventEmitter<boolean>();
+
+  // Whether the current user is allowed to delete this comment.
   canModify$ = inject(UserService).currentUser.pipe(
     map((userData: User | null) => userData?.username === this.comment.author.username),
   );
