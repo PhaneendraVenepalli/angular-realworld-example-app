@@ -44,7 +44,7 @@ export class ArticleCommentComponent {
   @Input() comment!: Comment;
   @Output() delete = new EventEmitter<boolean>();
 
-  // hello from branch1
+  // hello from branch 2
   canModify$ = inject(UserService).currentUser.pipe(
     map((userData: User | null) => userData?.username === this.comment.author.username),
   );
