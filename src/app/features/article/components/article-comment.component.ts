@@ -44,7 +44,7 @@ export class ArticleCommentComponent {
   @Input() comment!: Comment;
   @Output() delete = new EventEmitter<boolean>();
 
-  // Only show delete control when the signed-in user authored this comment.
+  // hello from branch1
   canModify$ = inject(UserService).currentUser.pipe(
     map((userData: User | null) => userData?.username === this.comment.author.username),
   );
